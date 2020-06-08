@@ -12,6 +12,7 @@ these settings already need to be on.
 * need to build out some perms
 * then need to go back to storage account if new function and create a connection thing again
 * then go to logic app and look at overview and see trigger history to get the api to put in the connection thing
+* logic functions need to come in as a webhook for somme reason? and not an azure function? 
 
 This shit makes me so sad:
 how the world to have to know the length of the subject in the body of this api upload? 
