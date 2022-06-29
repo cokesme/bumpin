@@ -1,0 +1,23 @@
+<html>
+<head>
+    <script src="docks.js"></script>
+</head>
+<body>
+    <canvas id="docks" width="600" height="600">
+    </canvas>
+    <br>
+    <span>Image to upload<input type="file"
+        id="meme" name="meme"
+        accept="image/png, image/jpeg">
+        <button onclick="upload()">Submit</button>
+    </span>
+    <br>
+    <span>Top Text<input id="toptext" onblur="addTopText()"></span>
+    <br>
+    <span>Upper Middle Text</span><input id="midtext" onblur="addMidText()"></span>
+    <br>
+    <span>Bottom Middle Text</span><input id="bidtext" onblur="addBidText()"></span>
+    <br>
+    <span>Bottom Text</span><input id="bottomtext" onblur="addBottomText()"></span>
+</body>
+</html>
