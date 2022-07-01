@@ -1,8 +1,12 @@
-var state = {width: 0, height: 0, ctx: null, image: null};
+var state = {width: 0, height: 0, ctx: null, image: null, startx: null, starty: null};
 var text = {top: null, mid: null, bid: null, bottom: null};
 function getCanvasCtx(){
     if (state.ctx == null) {
         let c = document.querySelector("#docks");
+        // setting this on the html element doesn't seem to work 
+        // 1. can you provide the event as an arg
+        // 2. can you set it in html without the ()? doesn't seem to work for the button
+        c.addEventListener('click', canvasClick);
         let ctx = /** @type {CanvasRenderingContext2D} */ c.getContext("2d");
         state.height = c.height;
         state.width = c.width;
@@ -10,6 +14,13 @@ function getCanvasCtx(){
     }
 
     return state.ctx;
+}
+
+function canvasClick(event) {
+    state.startx = event.pageX;
+    state.starty = event.pageY;
+    let input = document.querySelector("#toptext");
+    input.focus();
 }
 
 function clearHere(start_x, start_y, width, height) {
@@ -27,18 +38,9 @@ function addTopText(){
     addText(input.value, 50, 50);
 }
 
-function addMidText(){
-    let input = document.querySelector("#midtext");
-    addText(input.value, 50, 200);
-}
-
-function addBidText(){
-    let input = document.querySelector("#bidtext");
-    addText(input.value, 50, 350);
-}
-function addBottomText(){
-    let input = document.querySelector("#bottomtext");
-    addText(input.value, 50, 500);
+function clearWrite() {
+    state.startx = null;
+    state.starty = null;
 }
 
 function addText(text, start_x, start_y) {
@@ -50,6 +52,10 @@ function addText(text, start_x, start_y) {
     ctx.fillStyle = "white"
     // 36 pt vs 3 px
     ctx.font = "36pt Impact"
+    if (state.startx != null) {
+        start_x = state.startx;
+        start_y = state.starty;
+    }
     ctx.fillText(text, start_x, start_y);
     ctx.strokeText(text, start_x, start_y);
 }
