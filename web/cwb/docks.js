@@ -46,9 +46,14 @@ function addText(text, start_x, start_y) {
     ctx.fillStyle = "white"
     // 36 pt vs 3 px
     ctx.font = "36pt Impact"
-    //ctx.strokeText(text, start_x, start_y);
-    // TODO how to do both
     ctx.fillText(text, start_x, start_y);
+    ctx.strokeText(text, start_x, start_y);
+}
+
+function saveImage() { 
+    var ctx = /** @type {CanvasRenderingContext2D} */ getCanvasCtx();
+    var savedImage = c.toDataUrl();
+    window.open(savedImage)
 }
 
 // Clear the canvas and add the image
@@ -59,11 +64,8 @@ function addImage(image_src) {
     image.onload = function() {
         console.log("loaded image");
         ctx.drawImage(image, 0, 0, state.width, state.height)
-        //var savedImage = c.toDataUrl();
-        //window.open(savedImage)
-
+        // saveImage()
     }
-
     image.src = image_src;
 }
 
@@ -92,15 +94,16 @@ function docks(){
     ctx.strokeRect(50,50, 100, 100)
     // 75,75 125, 125, 125, 75
     // absolute instead of relative
-    // TODO: what does beginpath do
-    //ctx.beginPath();
+    // what does beginpath do?
+    // Answer: allows you to close the path after to make sure nothing else affects things
+    ctx.beginPath();
     ctx.moveTo(75,75)
     ctx.lineTo(125,75)
     ctx.lineTo(125,125)
-    ctx.lineTo(75,75)
+    ctx.closePath()
     ctx.fill()
 
     addText("LOLLOLOLOL", 50, 50);
-    
 }
+
 window.onload = docks;
