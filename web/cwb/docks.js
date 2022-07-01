@@ -1,11 +1,15 @@
-var state = {width: 0, height: 0, saved: null};
+var state = {width: 0, height: 0, ctx: null, image: null};
 var text = {top: null, mid: null, bid: null, bottom: null};
 function getCanvasCtx(){
-    let c = document.querySelector("#docks");
-    let ctx = /** @type {CanvasRenderingContext2D} */ c.getContext("2d");
-    state.height = c.height;
-    state.width = c.width;
-    return ctx;
+    if (state.ctx == null) {
+        let c = document.querySelector("#docks");
+        let ctx = /** @type {CanvasRenderingContext2D} */ c.getContext("2d");
+        state.height = c.height;
+        state.width = c.width;
+        state.ctx = ctx;
+    }
+
+    return state.ctx;
 }
 
 function clearHere(start_x, start_y, width, height) {
@@ -56,6 +60,12 @@ function saveImage() {
     window.open(savedImage)
 }
 
+function reset() {
+    if(state.image != null){
+        state.ctx.drawImage(state.image, 0, 0, state.width, state.height);
+    }
+}
+
 // Clear the canvas and add the image
 function addImage(image_src) {
     var ctx = /** @type {CanvasRenderingContext2D} */ getCanvasCtx();
@@ -63,7 +73,8 @@ function addImage(image_src) {
     var image = new Image();
     image.onload = function() {
         console.log("loaded image");
-        ctx.drawImage(image, 0, 0, state.width, state.height)
+        ctx.drawImage(image, 0, 0, state.width, state.height);
+        state.image = image;
         // saveImage()
     }
     image.src = image_src;
