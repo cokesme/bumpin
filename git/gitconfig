@@ -1,0 +1,8 @@
+[user]
+        email = test@lionsden.home
+        name = lol
+[alias]
+        del = rm
+        move = mv
+        send = commit -am
+        cfg = config
