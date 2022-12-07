@@ -3,7 +3,7 @@
         "PowerShell": {
             "source": "PowerShell",
             "icon": "terminal-powershell",
-            "args": ["-noe", "-c", "&{Import-Module \"C:\\\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\Microsoft.VisualStudio.DevShell.dll\"; Enter-VsDevShell a09ec5a2 -DevCmdArguments '-arch=x64 -no_logo'}"]
+            "args": ["-noe", "-c", "&{Import-Module 'C:\\\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\Microsoft.VisualStudio.DevShell.dll'; Enter-VsDevShell a09ec5a2 -DevCmdArguments '-arch=x64 -no_logo'}"]
 
         },
         "Command Prompt": {
