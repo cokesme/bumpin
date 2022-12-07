@@ -1,0 +1,41 @@
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html
+Type: AWS::Cognito::UserPool
+Properties: 
+  # LambdaConfig: 
+  #   LambdaConfig
+  AccountRecoverySetting: 
+    RecoveryMechanisms:
+    - Name: verified_email
+      Priority: 1
+  AdminCreateUserConfig: 
+    AllowAdminCreateUserOnly: False
+    InviteMessageTemplate: 
+      EmailMessage: "Your username is {username} and temporary password is {####}."
+      EmailSubject: "Your temporary password"
+      SMSMessage: "Your username is {username} and temporary password is {####}."
+    UnusedAccountValidityDays: 1
+  # AutoVerifiedAttributes: 
+  #   - String
+  # DeviceConfiguration: 
+  #   DeviceConfiguration
+  EmailConfiguration: 
+    EmailConfiguration
+  EmailVerificationMessage: String
+  EmailVerificationSubject: String
+  EnabledMfas: 
+    - SOFTWARE_TOKEN_MFA
+  MfaConfiguration: OPTIONAL
+  Policies: 
+    Policies
+  Schema: 
+    - SchemaAttribute
+  UserAttributeUpdateSettings: 
+    UserAttributeUpdateSettings
+  UsernameConfiguration: 
+    CaseSensitive: False
+  UserPoolAddOns: 
+    UserPoolAddOns
+  UserPoolName: nfl-users2
+  UserPoolTags: {"owner": "nfl"}
+  VerificationMessageTemplate: 
+    VerificationMessageTemplate
