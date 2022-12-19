@@ -24,4 +24,4 @@
  wrapper.ntservice.failure_actions.actions_delay=60000
 +wrapper.app.account=ghidra
 +wrapper.app.parameter.2=-u
-+wrapper.app.parameter.3=-i10.1.56.3
++wrapper.app.parameter.3=-i<wg interface ip>
