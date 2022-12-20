@@ -5,6 +5,11 @@
 ## Bugs
 - Best part is the attachment with generic ish kaslr defeat https://bugs.chromium.org/p/project-zero/issues/detail?id=2351
 
+## fuzzers
+### syzkaller
+- https://github.com/google/syzkaller
+- https://github.com/SunHao-0/healer (rust, uses syzlang and some relational shiz)
+
 ### Mitigations
 [sanitizers](https://google.github.io/kernel-sanitizers/)
 [Issue backlog for sanitizer work](https://bugzilla.kernel.org/buglist.cgi?component=Sanitizers&product=Memory%20Management&resolution=---)
