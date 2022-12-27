@@ -90,3 +90,6 @@ a.sort((b,c) => { return b.firstChild.attributes['aria-label'].value.localeCompa
 a.forEach(x=>console.log(x.childNodes[0].attributes['aria-label'].value))
 a.map(x=>temp1.firstElementChild.appendChild(x))
 ```
+
+### React 
+[devtools for react](https://reactjs.org/blog/2015/09/02/new-react-developer-tools.html#installation)
