@@ -63,3 +63,44 @@ With fast startup enabled, choosing to shut down your PC might look like you're 
 - troubleshooter
 - sfc /scannow
 - dism checkhealth
+internet advise that doesn't work
+```
+net stop wuauserv
+net stop cryptSvc
+net stop bits
+net stop msiserver
+ren C:\Windows\SoftwareDistribution SoftwareDistribution.old
+ren C:\Windows\System32\catroot2 catroot2.old
+net start wuauserv
+net start cryptSvc
+net start bits
+net start msiserver
+```
+downloading from the catalog
+```
+move *.mum C:\Windows\servicing\Packages\
+C:\Users\test\Downloads\package_1_for_kb5012170~31bf3856ad364e35~amd64~~10.0.1.1.mum
+C:\Users\test\Downloads\package_2_for_kb5012170~31bf3856ad364e35~amd64~~10.0.1.1.mum
+C:\Users\test\Downloads\package_3_for_kb5012170~31bf3856ad364e35~amd64~~10.0.1.1.mum
+```
+
+Relevant directories:
+1. C:\Windows\servicing\Packages
+2. C:\Windows\SoftwareDistribution
+3. C:\Windows\Logs\CBS
+4. C:\Windows\winsxs\
+
+Try to remove 
+```
+\winsxs\manifests\amd64_microsoft-windows-s..boot-firmwareupdate_31bf3856ad364e35_10.0.19041.1880_none_294d9e3cbae1ff57.manifest
+```
+no luck
+
+## TrustedInstaller Shit
+1. https://bugs.chromium.org/p/project-zero/issues/detail?id=997
+```
+REM START
+sc config TrustedInstaller binPath= "cmd.exe /C sc stop windefend && sc delete windefend" && sc start TrustedInstaller
+REM END
+```
+
