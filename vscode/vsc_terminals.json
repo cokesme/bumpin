@@ -1,20 +1,36 @@
 {
     "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
+        "PowerShell": null,
+        "Windows PowerShell": {
             "icon": "terminal-powershell",
-            "args": ["-noe", "-c", "&{Import-Module 'C:\\\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\Microsoft.VisualStudio.DevShell.dll'; Enter-VsDevShell a09ec5a2 -DevCmdArguments '-arch=x64 -no_logo'}"]
-
+            "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "args": [
+                "-noe",
+                "-c",
+                "&{Import-Module 'C:\\\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\Microsoft.VisualStudio.DevShell.dll'; Enter-VsDevShell 7468fae2 -DevCmdArguments '-arch=x64 -no_logo'}"
+            ]
         },
         "Command Prompt": {
             "path": [
                 "${env:windir}\\Sysnative\\cmd.exe",
                 "${env:windir}\\System32\\cmd.exe"
             ],
-            "args": ["/k", "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat"],
+            "args": [
+                "/k",
+                "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat"
+            ],
             "icon": "terminal-cmd"
         },
-        "Git Bash": null
+        "pwsh": {
+            "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": [
+                "-noe",
+                "-c",
+                "&{Import-Module 'C:\\\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\Microsoft.VisualStudio.DevShell.dll'; Enter-VsDevShell 7468fae2 -DevCmdArguments '-arch=x64 -no_logo'}"
+            ]
+        },
+        "Git Bash": null,
     },
-    "terminal.integrated.automationProfile.windows": null
+    "terminal.integrated.automationProfile.windows": null,
+    "terminal.integrated.defaultProfile.windows": "Windows PowerShell"
 }
