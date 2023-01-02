@@ -96,6 +96,12 @@ Try to remove
 ```
 no luck
 
+Ok, after reset, can confirm it is some shit with the security update `windows10.0-kb5012170-x64_47b8ba3bb35c66bbd0631f5425805ccf1dafaf67.msu` everything freezes
+
+Also, my tpm is reporting some shit in event viewer that it needs an update. (https://support.microsoft.com/en-us/windows/update-your-security-processor-tpm-firmware-94205cbc-a492-8d79-cc55-1ecd6b0a8022)
+
+I cannot even use bitlocker because of Windows home edition.
+
 ## TrustedInstaller Shit
 1. https://bugs.chromium.org/p/project-zero/issues/detail?id=997
 ```
@@ -103,4 +109,3 @@ REM START
 sc config TrustedInstaller binPath= "cmd.exe /C sc stop windefend && sc delete windefend" && sc start TrustedInstaller
 REM END
 ```
-
