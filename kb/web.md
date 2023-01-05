@@ -93,3 +93,6 @@ a.map(x=>temp1.firstElementChild.appendChild(x))
 
 ### React 
 [devtools for react](https://reactjs.org/blog/2015/09/02/new-react-developer-tools.html#installation)
+
+## Tooling
+The ecosystems really don't think about making frameworks or tools that work well with each other out of the gate. Like why do prisma and pscale not support using .env.local instead of .env (Jan 2023)
