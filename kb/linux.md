@@ -3,6 +3,7 @@
 - https://docs.kernel.org/search.html?q=kcsan&check_keywords=yes&area=default#
 
 ## Bugs
+1. kctf bugs and exploit techniques from google: https://docs.google.com/document/d/1a9uUAISBzw3ur1aLQqKc5JOQLaJYiOP5pe_B4xCT1KA/edit#, https://docs.google.com/presentation/d/e/2PACX-1vR4mpH3aARLMOhJemVGEw1cduXPEo_PvrbZMum8QwOJ6rhZvvezsif4qtgSydVVt8jPT1fztgD5Mj7q/pub?slide=id.g14c89387e5b_3_106
 1. Best part is the attachment with generic ish kaslr defeat https://bugs.chromium.org/p/project-zero/issues/detail?id=2351
 2. heap reuse to lead to credential overrite: https://github.com/Markakd/DirtyCred
 3. found with default syzkaller in 2022 and used against kctf (introduced in 2019): https://www.willsroot.io/2022/01/cve-2022-0185.html?m=1
