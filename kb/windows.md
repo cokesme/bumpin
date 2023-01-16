@@ -109,3 +109,16 @@ REM START
 sc config TrustedInstaller binPath= "cmd.exe /C sc stop windefend && sc delete windefend" && sc start TrustedInstaller
 REM END
 ```
+
+## Public tools
+There is this really interesting project around showing structures for Windows across windows versions in a nice web friendly way
+- https://www.vergiliusproject.com/kernels/x64/Windows%2010%20%7C%202016/2009%2020H2%20(October%202020%20Update)/BATTERY_REPORTING_SCALE
+- 
+
+## Bugs
+### NT
+#### ETW
+- Interesting post about CVE-2023-21536 and why certain filters aren't vulnerable even if they don't have the explicit locking mechanism. "As mentioned before, another three filters take exactly the same "no lock" flow via NtTraceEvent() api: EtwpApplyEventIdPayloadFilter(), EtwpApplyEventNameFilter(), EtwpApplyStackWalkIdFilter()" because of IRQL synchronoization. https://dannyodler.hashnode.dev/racing-bugs-in-windows-kernel
+    - "Spraying controlled data with WNF objects might be a good try. You can read more on WNF for exploitation here (4)." https://research.nccgroup.com/2021/07/15/cve-2021-31956-exploiting-the-windows-kernel-ntfs-with-wnf-part-1/
+#### Registry
+- NtNotifyChangeMultipleKeys, CVE-2022-44683, MSRC-74576, registries and symbolic links

@@ -18,6 +18,13 @@
     - [rough start](https://lwn.net/Articles/871866/)
     - [perf](https://samba.plus/blog/detail/ksmbd-a-new-in-kernel-smb-server)
     - [openwrt](https://github.com/openwrt/openwrt/pull/11603)
+
+5. CVE-2022-32250
+    - 5.13 [writeup](https://web.archive.org/web/20221205220534/https://research.nccgroup.com/2022/09/01/settlers-of-netlink-exploiting-a-limited-uaf-in-nf_tables-cve-2022-32250/)
+    - 5.15 [writeup](https://web.archive.org/web/20220830204358/https://blog.theori.io/research/CVE-2022-32250-linux-kernel-lpe-2022/)
+    - 5.18.1 [writeup](https://web.archive.org/web/20221222074310/https://blog.exodusintel.com/2022/12/19/linux-kernel-exploiting-a-netfilter-use-after-free-in-kmalloc-cg/)
+"The aforementioned exploitation strategies are different from each other and from the one detailed here since the targeted kernel versions have different peculiarities. In version 5.13, allocations performed with either the GFP_KERNEL flag or the GFP_KERNEL_ACCOUNT flag are served by the kmalloc-* slab caches. In version 5.15, allocations performed with the GFP_KERNEL_ACCOUNT flag are served by the kmalloc-cg-* slab caches. While in both 5.13 and 5.15 the affected object, nft_expr, is allocated using GFP_KERNEL, the difference in exploitation between them arises because a commonly used heap spraying object, the System V message structure (struct msg_msg), is served from kmalloc-* in 5.13 but from kmalloc-cg-* in 5.15. Therefore, in 5.15, struct msg_msg cannot be used to exploit this vulnerability.
+In 5.18.1, the object involved in the use-after-free vulnerability, nft_expr, is itself allocated with GFP_KERNEL_ACCOUNT in the kmalloc-cg-* slab caches. Since the exploitation strategies presented by the NCC Group and Theori rely on objects allocated with  GFP_KERNEL, they do not work against the latest vulnerable version of the Linux kernel."
        
    
 
