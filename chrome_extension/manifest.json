@@ -1,14 +1,18 @@
 {
     "manifest_version": 3,
-    "name": "Hello Extensions",
+    "name": "Discord Silencer",
     "content_security_policy": {
         "extension_pages": "script-src 'self'; object-src 'self';",
         "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
     },
-    "description": "Base Level Extension",
+    "description": "Make Discord usable",
     "version": "1.0",
     "action": {
-        "default_popup": "hello.html",
-        "default_icon": "flame.svg"
-    }
+        "default_title": "d-hide"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["scripting"],
+    "host_permissions": ["https://discord.com/*"]
 }
