@@ -122,3 +122,5 @@ There is this really interesting project around showing structures for Windows a
     - "Spraying controlled data with WNF objects might be a good try. You can read more on WNF for exploitation here (4)." https://research.nccgroup.com/2021/07/15/cve-2021-31956-exploiting-the-windows-kernel-ntfs-with-wnf-part-1/
 #### Registry
 - NtNotifyChangeMultipleKeys, CVE-2022-44683, MSRC-74576, registries and symbolic links
+    - stale pointer becuase of not calling the proper list cleanup for the notification list
+    
