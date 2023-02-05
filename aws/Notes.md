@@ -1,5 +1,7 @@
 # AWS Notes
 The AWS journey and javascript...
+
+AWS Well-Architected Framework Doc: https://docs.aws.amazon.com/pdfs/wellarchitected/latest/framework/wellarchitected-framework.pdf
 ## CloudTrail
 Turned this shit on to see what's up
 
