@@ -123,4 +123,8 @@ There is this really interesting project around showing structures for Windows a
 #### Registry
 - NtNotifyChangeMultipleKeys, CVE-2022-44683, MSRC-74576, registries and symbolic links
     - stale pointer becuase of not calling the proper list cleanup for the notification list
-    
+
+
+## Windbg
+- Registers are not iterable
+- there doesn't seem to be a good data model for memory, but I need to check
