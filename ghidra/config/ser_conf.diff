@@ -14,7 +14,7 @@
  #                       repositories directory must be retained.
  wrapper.app.parameter.1=-a0
 -wrapper.app.parameter.2=${ghidra.repositories.dir}
-+wrapper.app.parameter.4=${ghidra.repositories.dir}
++wrapper.app.parameter.5=${ghidra.repositories.dir}
  
  # Establish server process owner
  # This should only be used when installing as a service using a nologin
@@ -25,3 +25,4 @@
 +wrapper.app.account=ghidra
 +wrapper.app.parameter.2=-u
 +wrapper.app.parameter.3=-i<wg interface ip>
++wrapper.app.parameter.4=-ssh

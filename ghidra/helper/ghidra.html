@@ -1,0 +1,20 @@
+<html>
+    <form method=POST action=/reset method="POST">
+    reset pw
+        <input type=text name=username>
+        
+        <input type=submit value="user reset">
+    </form>
+    <form method=POST action=/add method="POST">
+    add user (default pw: changeme)
+        <input type=text name=username>
+        
+        <input type=submit value="user add">
+    </form>
+    <form method=POST action=/key enctype=multipart/form-data>
+    upload ssh public key for user
+        <input type=text name=username>
+        <input type=file name=file>
+        <input type=submit value=Upload>
+    </form>
+</html>
