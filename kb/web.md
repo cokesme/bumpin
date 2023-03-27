@@ -96,3 +96,7 @@ a.map(x=>temp1.firstElementChild.appendChild(x))
 
 ## Tooling
 The ecosystems really don't think about making frameworks or tools that work well with each other out of the gate. Like why do prisma and pscale not support using .env.local instead of .env (Jan 2023)
+
+## Web language
+### Selectors
+`body > table:nth-child(4) > tbody > tr:nth-child(3) > td:nth-child(5) > a`
