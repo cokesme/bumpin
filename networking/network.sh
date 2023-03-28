@@ -19,6 +19,7 @@ echo $(echo $key | wg pubkey)
 cat > ./conf << EOF
 [Interface]
 Privatekey = $key
+ListenPort = $3
 
 [Peer]
 PublicKey = $1
