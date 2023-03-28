@@ -74,7 +74,7 @@ networks:
     attachable: true
   server:
 
-  configs:
-    caddyfile:
-      file: ./Caddyfile
+configs:
+  caddyfile:
+    file: ./Caddyfile
   
