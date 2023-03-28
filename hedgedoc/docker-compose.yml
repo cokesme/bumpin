@@ -29,7 +29,6 @@ services:
       - CMD_EMAIL=true
       - CMD_ALLOW_EMAIL_REGISTER=true
       - CMD_ALLOW_GRAVATAR=false
-    env_file: ./secrets.env
     volumes:
       - uploads:/hedgedoc/public/uploads
     ports:
