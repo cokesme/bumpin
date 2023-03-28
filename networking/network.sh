@@ -11,10 +11,8 @@
 # Mainly to prevent the following:
 # anyone can connect to anyone else's local shit that default bind to all interfaces on the wg client right now, right
 
-
-
 ip link add dev wg0 type wireguard
-ip address add dev wg0 10.1.56.3/16
+ip address add dev wg0 $WG_IP/16
 
 key=$(wg genkey)
 echo $(echo $key | wg pubkey)
@@ -24,7 +22,7 @@ Privatekey = $key
 
 [Peer]
 PublicKey = $1
-AllowedIPS= 10.1.56.1/32
+AllowedIPS= $2/32
 PersistentKeepAlive=20
 EOF
 
