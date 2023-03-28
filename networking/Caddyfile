@@ -1,0 +1,20 @@
+{$CADDY_SITE}
+
+# Templates give static sites some dynamic features
+# templates
+
+# Compress responses according to Accept-Encoding headers
+encode gzip zstd
+
+# Make HTML file extension optional
+try_files {path}.html {path}
+
+# This might need to be after file_server
+root * /var/www/
+
+# Send API requests to backend
+# Want this for flask?
+# reverse_proxy /api/* localhost:9005
+
+# Serve everything else from the file system
+file_server browse

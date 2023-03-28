@@ -1,17 +1,21 @@
+<!--use a sprig directive to concatenate the ip and port-->
+{{$ip := .env "WG_IP"}}
+{{$port := .env "GHIDRA_WEB_PORT"}}
+{{$domain := $ip:$port}}
 <html>
-    <form method=POST action=/reset method="POST">
+    <form method=POST action={{$domain}}/reset method="POST">
     reset pw
         <input type=text name=username>
         
         <input type=submit value="user reset">
     </form>
-    <form method=POST action=/add method="POST">
+    <form method=POST action={{$domain}}/add method="POST">
     add user (default pw: changeme)
         <input type=text name=username>
         
         <input type=submit value="user add">
     </form>
-    <form method=POST action=/key enctype=multipart/form-data>
+    <form method=POST action={{$domain}}/key enctype=multipart/form-data>
     upload ssh public key for user
         <input type=text name=username>
         <input type=file name=file>

@@ -13,6 +13,8 @@ services:
     volumes:
       - database:/var/lib/postgresql/data
     restart: always
+    networks:
+      - hedge
   doc-app:
     # Make sure to use the latest release from https://hedgedoc.org/latest-release
     # < version 2 though...
@@ -36,6 +38,8 @@ services:
     restart: always
     depends_on:
       - database
+    networks:
+      - hedge
   # not related to hedgedoc, but just the infra we all need
   # rev-sync uses redis
   # not really sure on redis being used by more things  
@@ -47,7 +51,31 @@ services:
       - redis:/data
     ports:
       - "$WG_IP:6379:6379"
+    networks:
+      - rev
+  web-server:
+    image: caddy:alpine
+    ports: 
+      - "$WG_IP:80:80"
+      - "$WG_IP:443:443"
+    configs:
+      - source: caddyfile
+        target: /etc/caddy/Caddyfile  
+    networks:
+      - server
+
 volumes:
   database:
   uploads:
   redis:
+
+networks:
+  hedge:
+  rev:
+    attachable: true
+  server:
+
+  configs:
+    caddyfile:
+      file: ./Caddyfile
+  
