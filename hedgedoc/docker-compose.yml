@@ -13,7 +13,7 @@ services:
     volumes:
       - database:/var/lib/postgresql/data
     restart: always
-  app:
+  doc-app:
     # Make sure to use the latest release from https://hedgedoc.org/latest-release
     # < version 2 though...
     image: quay.io/hedgedoc/hedgedoc:1.9.7
@@ -36,6 +36,18 @@ services:
     restart: always
     depends_on:
       - database
+  # not related to hedgedoc, but just the infra we all need
+  # rev-sync uses redis
+  # not really sure on redis being used by more things  
+  rev-redis:
+    image: redis:7-apline
+    cmd: redis-server --appendonly yes --requirepass $REDIS_PASSWORD
+    # this might not work since redis puts its own volume
+    volumes:
+      - redis:/data
+    ports:
+      - "$WG_IP:6379:6379"
 volumes:
   database:
   uploads:
+  redis:
