@@ -19,8 +19,13 @@ services:
     image: quay.io/hedgedoc/hedgedoc:1.9.7
     environment:
       - CMD_DB_URL=postgres://$USER:$PG_PASSWORD@database:5432/hedgedoc
-      - CMD_DOMAIN=localhost
-      - CMD_URL_ADDPORT=true
+      # - CMD_DOMAIN=localhost
+      # - CMD_URL_ADDPORT=true
+      - CMD_ALLOW_ANONYMOUS=true
+      - CMD_ALLOW_ANONYMOUS_EDITS=true
+      - CMD_ALLOW_FREEURL=true
+      - CMD_EMAIL=true
+      - CMD_ALLOW_EMAIL_REGISTER=true
       - CMD_ALLOW_GRAVATAR=false
     env_file: ./secrets.env
     volumes:
