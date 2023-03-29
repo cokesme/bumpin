@@ -21,8 +21,8 @@ services:
     image: quay.io/hedgedoc/hedgedoc:1.9.7
     environment:
       - CMD_DB_URL=postgres://$USER:$PG_PASSWORD@database:5432/hedgedoc
-      # - CMD_DOMAIN=localhost
-      # - CMD_URL_ADDPORT=true
+      - CMD_DOMAIN=localhost
+      - CMD_URL_ADDPORT=true
       - CMD_ALLOW_ANONYMOUS=true
       - CMD_ALLOW_ANONYMOUS_EDITS=true
       - CMD_ALLOW_FREEURL=true
@@ -59,6 +59,8 @@ services:
     environment:
       # http is required for it to bind to http port
       - CADDY_SITE="http://$WG_IP"
+      - WG_IP=$WG_IP
+      - GHIDRA_WEB_PORT=$GHIDRA_WEB_PORT
     configs:
       - source: caddyfile
         target: /etc/caddy/Caddyfile  
