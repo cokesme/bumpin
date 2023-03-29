@@ -1,3 +1,7 @@
+{
+    auto_https disable_redirects
+}
+
 {$CADDY_SITE}
 
 # Templates give static sites some dynamic features
