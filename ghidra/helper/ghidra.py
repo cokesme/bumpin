@@ -16,12 +16,14 @@ import re
 # GHIDRA_INSTALL_DIR: where to find the ghidra server admin tool
 # GHIDRA_WEB_PORT: port to run the web server on
 # WG_IP: ip to bind to
+# JAVA_HOME: where to find java
+# or java in the path
 
 # No idea how to do config shit
 GHIDRA_DATA_DIR= os.environ.get('GHIDRA_DATA_DIR', '/home/ghidra/data')
 UPLOAD_FOLDER = GHIDRA_DATA_DIR+'/ssh'
 USER_DB = GHIDRA_DATA_DIR+'/users.txt'
-GHIDRA_INSTALL_DIR= os.environ.get('GHIDRA_DATA_DIR', '/home/ghidra/ghidra/data')
+GHIDRA_INSTALL_DIR= os.environ.get('GHIDRA_INSTALL_DIR', '/home/ghidra/ghidra/data')
 GHIDRA_ADMIN_TOOL = GHIDRA_INSTALL_DIR+'/server/svrAdmin'
 
 app = Flask(__name__)
@@ -44,7 +46,7 @@ def add():
             subprocess.run([GHIDRA_ADMIN_TOOL, "-add", user])
             with open(USER_DB, "a") as f:
                 f.write(user+"\n")
-            return "added user"+user
+            return "added user "+user
         else:
             return "user exists"
 

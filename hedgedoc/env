@@ -1,3 +1,4 @@
 export WG_IP=
 export PG_PASSWORD=
 export REDIS_PASSWORD=
+export GHIDRA_WEB_PORT=
