@@ -5,7 +5,7 @@ services:
     # image: postgres:13.4-alpine
     # everything before 14 uses md5...
     # https://hub.docker.com/_/postgres
-    image: postegres:15.2-alpine
+    image: postgres:15.2-alpine
     environment:
       - POSTGRES_USER=$USER
       - POSTGRES_PASSWORD=$PG_PASSWORD
@@ -43,8 +43,8 @@ services:
   # rev-sync uses redis
   # not really sure on redis being used by more things  
   rev-redis:
-    image: redis:7-apline
-    cmd: redis-server --appendonly yes --requirepass $REDIS_PASSWORD
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --requirepass $REDIS_PASSWORD
     # this might not work since redis puts its own volume
     volumes:
       - redis:/data
@@ -57,6 +57,8 @@ services:
     ports: 
       - "$WG_IP:80:80"
       - "$WG_IP:443:443"
+    environment:
+      - CADDY_SITE=$WG_IP
     configs:
       - source: caddyfile
         target: /etc/caddy/Caddyfile  
