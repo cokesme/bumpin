@@ -1,5 +1,7 @@
 {
-    auto_https disable_redirects
+    auto_https off
+    skip_install_trust
+    admin off
 }
 
 {$CADDY_SITE}

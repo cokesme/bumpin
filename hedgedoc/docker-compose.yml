@@ -57,7 +57,8 @@ services:
     ports: 
       - "$WG_IP:80:80"
     environment:
-      - CADDY_SITE=$WG_IP
+      # http is required for it to bind to http port
+      - CADDY_SITE="http://$WG_IP"
     configs:
       - source: caddyfile
         target: /etc/caddy/Caddyfile  
