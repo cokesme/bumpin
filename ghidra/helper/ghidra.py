@@ -7,9 +7,12 @@ import subprocess
 import os
 import re
 
+# Requirements: flask, python3, ghidra server admin tool
+# 1. Install ghidra server
+# 2. symbolically link ssh to ~ssh in the ghidra data directory
+
 # Environment variables
 # GHIDRA_DATA_DIR: where to store the user database and ssh keys
-# GHIDRA_HOME: where to store the user database and ssh keys
 # GHIDRA_INSTALL_DIR: where to find the ghidra server admin tool
 # GHIDRA_WEB_PORT: port to run the web server on
 # WG_IP: ip to bind to
@@ -18,9 +21,7 @@ import re
 GHIDRA_DATA_DIR= os.environ.get('GHIDRA_DATA_DIR', '/home/ghidra/data')
 UPLOAD_FOLDER = GHIDRA_DATA_DIR+'/ssh'
 USER_DB = GHIDRA_DATA_DIR+'/users.txt'
-GHIDRA_HOME = os.environ.get('GHIDRA_HOME', '/home/ghidra/data')
 GHIDRA_INSTALL_DIR= os.environ.get('GHIDRA_DATA_DIR', '/home/ghidra/ghidra/data')
-GHIDRA_HOME = "/home/ghidra/ghidra/"
 GHIDRA_ADMIN_TOOL = GHIDRA_INSTALL_DIR+'/server/svrAdmin'
 
 app = Flask(__name__)
