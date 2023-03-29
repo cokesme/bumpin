@@ -14,7 +14,7 @@ encode gzip zstd
 try_files {path}.html {path}
 
 # This might need to be after file_server
-root * /var/www/
+root * /srv
 
 # Send API requests to backend
 # Want this for flask?
