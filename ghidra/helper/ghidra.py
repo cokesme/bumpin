@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Flask, redirect, render_template, request, abort, after_this_request
-from urllib.parse import urlparse
+from flask import Flask, request
 import subprocess
 import os
 import re
@@ -84,6 +83,7 @@ def key():
             users = f.read().splitlines()
         if user in users:
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], user+".pub"))
+            # Reset the docker container for git to have it use the same ssh keys enabled for ghidra
             if GIT_DOCKER_ENABLED:
                 docker.get(GIT_DOCKER_NAME).reset()
             return "uploaded key for "+user
