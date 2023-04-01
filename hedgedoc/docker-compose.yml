@@ -66,6 +66,13 @@ services:
         target: /etc/caddy/Caddyfile  
     networks:
       - server
+    git:
+      image: jkarlos/git-server-docker
+      ports:
+        - "$WG_IP:1022:22"
+      volumes:
+        - $PWD/git_data/repos:/git-server/repos
+        - $PWD/git_data/ssh:/git-server/keys
 
 volumes:
   database:
