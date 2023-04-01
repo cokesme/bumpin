@@ -6,8 +6,9 @@ from urllib.parse import urlparse
 import subprocess
 import os
 import re
+import docker as dockerlib
 
-# Requirements: flask, python3, ghidra server admin tool
+# Requirements: flask, docker, python3, ghidra server admin tool
 # 1. Install ghidra server
 # 2. symbolically link ssh to ~ssh in the ghidra data directory
 
@@ -18,6 +19,7 @@ import re
 # WG_IP: ip to bind to
 # JAVA_HOME: where to find java
 # or java in the path
+# GIT_DOCKER: if set, will use docker to run git commands
 
 # No idea how to do config shit
 GHIDRA_DATA_DIR= os.environ.get('GHIDRA_DATA_DIR', '/home/ghidra/data')
@@ -25,10 +27,13 @@ UPLOAD_FOLDER = GHIDRA_DATA_DIR+'/ssh'
 USER_DB = GHIDRA_DATA_DIR+'/users.txt'
 GHIDRA_INSTALL_DIR= os.environ.get('GHIDRA_INSTALL_DIR', '/home/ghidra/ghidra/data')
 GHIDRA_ADMIN_TOOL = GHIDRA_INSTALL_DIR+'/server/svrAdmin'
+GIT_DOCKER_NAME = os.environ.get("GIT_DOCKER", None)
+GIT_DOCKER_ENABLED = True if GIT_DOCKER_NAME is not None else False
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+docker = dockerlib.from_env() if GIT_DOCKER_ENABLED else None
 
 # security...
 pat = re.compile(r"^[a-zA-Z]{1,20}$")
@@ -79,6 +84,8 @@ def key():
             users = f.read().splitlines()
         if user in users:
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], user+".pub"))
+            if GIT_DOCKER_ENABLED:
+                docker.get(GIT_DOCKER_NAME).reset()
             return "uploaded key for "+user
         else:
             return "bad user name "+user
