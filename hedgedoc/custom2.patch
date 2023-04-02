@@ -1,0 +1,113 @@
+diff --git a/lib/history.js b/lib/history.js
+index e0c16da5e..0aa3b64cf 100644
+--- a/lib/history.js
++++ b/lib/history.js
+@@ -17,45 +17,28 @@ const History = {
+ }
+ 
+ function getHistory (userid, callback) {
+-  models.User.findOne({
+-    where: {
+-      id: userid
+-    }
+-  }).then(function (user) {
+-    if (!user) {
++  models.Note.findAll().then(function (notes) {
++    // [{"id":"practice","text":"Practice","time":1680231818273,"tags":[]},{"id":"androi","text":"Untitled","time":1680237662879,"tags":[]},{"id":"android","text":"Android","time":1680400934755,"tags":[]}]
++    // let history = {"id": "practice", "text":"test", "time":, "tags":[]}
++    let history = []
++    let id = 0
++    let date = 0
++    if (!notes) {
+       return callback(null, null)
+     }
+-    let history = {}
+-    if (user.history) {
+-      history = JSON.parse(user.history)
+-      // migrate LZString encoded note id to base64url encoded note id
+-      for (let i = 0, l = history.length; i < l; i++) {
+-        // Calculate minimal string length for an UUID that is encoded
+-        // base64 encoded and optimize comparsion by using -1
+-        // this should make a lot of LZ-String parsing errors obsolete
+-        // as we can assume that a nodeId that is 48 chars or longer is a
+-        // noteID.
+-        const base64UuidLength = ((4 * 36) / 3) - 1
+-        if (!(history[i].id.length > base64UuidLength)) {
+-          continue
+-        }
+-        try {
+-          const id = LZString.decompressFromBase64(history[i].id)
+-          if (id && models.Note.checkNoteIdValid(id)) {
+-            history[i].id = models.Note.encodeNoteId(id)
+-          }
+-        } catch (err) {
+-          // most error here comes from LZString, ignore
+-          if (err.message === 'Cannot read property \'charAt\' of undefined') {
+-            logger.warning('Looks like we can not decode "' + history[i].id + '" with LZString. Can be ignored.')
+-          } else {
+-            logger.error(err)
+-          }
+-        }
++    for (let i = 0, l = notes.length; i < l; i++) {
++      id = notes[i].id
++      history[i] = {}
++      if (id && models.Note.checkNoteIdValid(id)) {
++        date = notes[i].lastchangeAt !== null ? notes[i].lastchangeAt : notes[i].savedAt
++        history[i].id = models.Note.encodeNoteId(id)
++        history[i].text = notes[i].title
++        history[i].time = Date.parse(date)
++        history[i].tags = []
+       }
+-      history = parseHistoryToObject(history)
+     }
+-    logger.debug(`read history success: ${user.id}`)
++    history = parseHistoryToObject(history)
++    logger.debug('read history success')
+     return callback(null, history)
+   }).catch(function (err) {
+     logger.error('read history failed: ' + err)
+@@ -119,17 +102,13 @@ function parseHistoryToObject (history) {
+ }
+ 
+ function historyGet (req, res) {
+-  if (req.isAuthenticated()) {
+-    getHistory(req.user.id, function (err, history) {
+-      if (err) return errors.errorInternalError(res)
+-      if (!history) return errors.errorNotFound(res)
+-      res.send({
+-        history: parseHistoryToArray(history)
+-      })
++  getHistory({}, function (err, history) {
++    if (err) return errors.errorInternalError(res)
++    if (!history) return errors.errorNotFound(res)
++    res.send({
++      history: parseHistoryToArray(history)
+     })
+-  } else {
+-    return errors.errorForbidden(res)
+-  }
++  })
+ }
+ 
+ function historyPost (req, res) {
+diff --git a/public/js/history.js b/public/js/history.js
+index 0dc3e5e5c..123201ece 100644
+--- a/public/js/history.js
++++ b/public/js/history.js
+@@ -192,14 +192,8 @@ function generateHistory (title, tags, notehistory) {
+ 
+ // used for outer
+ export function getHistory (callback) {
+-  checkIfAuth(
+-    () => {
+-      getServerHistory(callback)
+-    },
+-    () => {
+-      getStorageHistory(callback)
+-    }
+-  )
++  // just hit it 
++  getServerHistory(callback)
+ }
+ 
+ function getServerHistory (callback) {
