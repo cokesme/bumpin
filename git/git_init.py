@@ -19,6 +19,8 @@ app = Flask(__name__)
 
 # security...
 pat = re.compile(r"^[a-zA-Z]{1,100}$")
+# Work diretory doesn't seem to change the directory to
+os.chdir(REPOS)
 
 @app.route('/add', methods=['POST'])
 def add():
@@ -26,10 +28,9 @@ def add():
     if pat.fullmatch(repo_name) is None:
         return "bad reponame. only a-zA-Z"+repo_name
     else:
-        repo_name = git.init_repository(repo_name, bare=True, mode=git.GIT_REPOSITORY_INIT_SHARED_ALL, workdir_path=REPOS)
+        repo_name = git.init_repository(repo_name, bare=True, mode=git.GIT_REPOSITORY_INIT_SHARED_ALL)
         return "repo created "+repo_name
         
-
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to something.
     PRIVATE_HOST=os.environ.get('WG_IP')
