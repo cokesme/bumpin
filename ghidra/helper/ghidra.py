@@ -90,21 +90,6 @@ def key():
             return "uploaded key for "+user
         else:
             return "bad user name "+user
-        
-@app.route('/server', methods=['POST'])
-def ghidra_health():
-    a = subprocess.check_output([GHIDRA_STATUS_TOOL, "status"])
-    # checkoutput of the subprocess run to see if the lines contain "Running     : true"
-    if b"Running     : true" in a:
-        return "ghidra is running"
-    else:
-        subprocess.run([GHIDRA_STATUS_TOOL, "start"])
-        a = subprocess.check_output([GHIDRA_STATUS_TOOL, "status"])
-        # checkoutput of the subprocess run to see if the lines contain "Running     : true"
-        if b"Running     : true" in a:
-            return "ghidra started"
-        else:
-            return "ghidra failed to start"
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to something.
