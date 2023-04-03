@@ -85,7 +85,7 @@ def key():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], user+".pub"))
             # Reset the docker container for git to have it use the same ssh keys enabled for ghidra
             if GIT_DOCKER_ENABLED:
-                docker.get(GIT_DOCKER_NAME).reset()
+                docker.containers.get(GIT_DOCKER_NAME).reset()
             return "uploaded key for "+user
         else:
             return "bad user name "+user
