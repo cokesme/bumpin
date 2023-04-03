@@ -26,6 +26,7 @@ UPLOAD_FOLDER = GHIDRA_DATA_DIR+'/ssh'
 USER_DB = GHIDRA_DATA_DIR+'/users.txt'
 GHIDRA_INSTALL_DIR= os.environ.get('GHIDRA_INSTALL_DIR', '/home/ghidra/ghidra/data')
 GHIDRA_ADMIN_TOOL = GHIDRA_INSTALL_DIR+'/server/svrAdmin'
+GHIDRA_STATUS_TOOL = GHIDRA_INSTALL_DIR+'/server/ghidraSrv'
 GIT_DOCKER_NAME = os.environ.get("GIT_DOCKER", None)
 GIT_DOCKER_ENABLED = True if GIT_DOCKER_NAME is not None else False
 
@@ -89,6 +90,21 @@ def key():
             return "uploaded key for "+user
         else:
             return "bad user name "+user
+        
+@app.route('/server', methods=['POST'])
+def ghidra_health():
+    a = subprocess.check_output([GHIDRA_STATUS_TOOL, "status"])
+    # checkoutput of the subprocess run to see if the lines contain "Running     : true"
+    if b"Running     : true" in a:
+        return "ghidra is running"
+    else:
+        subprocess.run([GHIDRA_STATUS_TOOL, "start"])
+        a = subprocess.check_output([GHIDRA_STATUS_TOOL, "status"])
+        # checkoutput of the subprocess run to see if the lines contain "Running     : true"
+        if b"Running     : true" in a:
+            return "ghidra started"
+        else:
+            return "ghidra failed to start"
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to something.

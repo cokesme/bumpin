@@ -22,4 +22,8 @@
         <input type=file name=file>
         <input type=submit value=Upload>
     </form>
+    <form method=POST action={{$uri}}{{$domain}}/server method="POST">
+    Start the ghidra server if it isn't running
+        <input type=submit value="start">
+    </form>
 </html>
