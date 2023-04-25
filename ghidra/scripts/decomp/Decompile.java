@@ -20,11 +20,7 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
-// import ghidra.app.plugin.core.script.Ingredient;
-// import ghidra.app.plugin.core.script.IngredientDescription;
-import ghidra.app.script.GatherParamPanel;
 import ghidra.app.script.GhidraScript;
 import ghidra.app.util.Option;
 import ghidra.app.util.exporter.CppExporter;
@@ -34,17 +30,6 @@ public class Decompile extends GhidraScript {
 
 	@Override
 	public void run() throws Exception {
-		// IngredientDescription[] ingredients = getIngredientDescriptions();
-		// for (IngredientDescription ingredient : ingredients) {
-		// 	state.addParameter(ingredient.getID(), ingredient.getLabel(), ingredient.getType(),
-		// 		ingredient.getDefaultValue());
-		// }
-
-		// Removing args and getting the output file name from program
-		// String[] args = getScriptArgs();
-		// System.out.println("ARGS: " + Arrays.toString(args));
-		// File outputFile = new File(args[0]);
-
 		// Output file name
 		// Convert the unique program id which is a long to a string
 		File outputFile = new File(currentProgram.getName().concat(""+currentProgram.getUniqueProgramID()).concat(".c"));
@@ -57,12 +42,4 @@ public class Decompile extends GhidraScript {
 		cppExporter.setExporterServiceProvider(state.getTool());
 		cppExporter.export(outputFile, currentProgram, null, monitor);
 	}
-
-	// @Override
-	// public IngredientDescription[] getIngredientDescriptions() {
-	// 	IngredientDescription[] retVal = new IngredientDescription[] {
-	// 		new IngredientDescription("COutputFile", "Output C File", GatherParamPanel.FILE, "") };
-	// 	return retVal;
-	// }
-
 }
