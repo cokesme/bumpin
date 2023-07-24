@@ -100,3 +100,21 @@ The ecosystems really don't think about making frameworks or tools that work wel
 ## Web language
 ### Selectors
 `body > table:nth-child(4) > tbody > tr:nth-child(3) > td:nth-child(5) > a`
+
+
+# Layout and Rendering
+I am very interested in making the CWB boat website still with handdrawn looking graphics and some wind. I imagine it will be possible with webgl and a canvas, but I'm not 100% sure how. Plus I would also like to just understand the basics of the rendering engine and css. I know the Google suite moved to html5 and a custom rendering engine 
+## Places to play around
+- jsfiddle
+- shadertoy
+
+## things to know
+### colors
+"Mixing paint results in darker colors, whereas mixing light results in lighter colors." 
+- Originally published at www.austincodingacademy.com on April 27, 2016., https://medium.com/@austincoding/why-is-web-color-rgb-and-not-ryb-47f4aea0f557
+
+Makes so much sense, on why RGB vs RYB, emitting light vs reflecting light. Additive vs subtractive.
+### drawing
+"Hardware-accelerated alpha-blending also enables anti-aliasing. Aliasing is an artifact caused by sampling a continuous function. For example, when a curved line is converted to pixels, aliasing can cause a jagged appearance. Any technique that reduces the artifacts caused by aliasing is considered a form of anti-aliasing. In graphics, anti-aliasing is done by blending edges with the background. For example, here is a circle drawn by GDI and the same circle drawn by Direct2D." - https://learn.microsoft.com/en-us/windows/win32/learnwin32/overview-of-the-windows-graphics-architecture 
+- Although GDI+ supports anti-aliasing, it is applied by the CPU, so the performance is not as good as Direct2D.
+- raster vs vector - raster it was uses pixels, vector uses math to draw the lines
